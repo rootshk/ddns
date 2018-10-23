@@ -5,7 +5,6 @@ import com.aliyuncs.IAcsClient;
 import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsRequest;
 import com.aliyuncs.alidns.model.v20150109.DescribeDomainRecordsResponse;
 import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordRequest;
-import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordResponse;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
@@ -29,12 +28,12 @@ public class ALiYunServiceImpl implements ALiYunService {
     }
 
     @Override
-    public void updateDomainRecord(String domain, String rR, String value, String type, Long ttl, Long priority, String line) {
+    public Boolean updateDomainRecord(String domain, String rR, String value, String type, Long ttl, Long priority, String line) {
 
         //要更新, 就要先查找
         String recordId = getDomainRecordId(domain, rR);
         if (null == recordId)
-            return;
+            return false;
 
         //设置解析值
         UpdateDomainRecordRequest updateDomainRecordRequest = new UpdateDomainRecordRequest();
@@ -51,11 +50,12 @@ public class ALiYunServiceImpl implements ALiYunService {
 //            System.out.println(updateDomainRecordResponse.getRecordId());
             client.getAcsResponse(updateDomainRecordRequest);
             System.out.println("提示: ------------>> 更新解析成功");
+            return true;
         } catch (ClientException e) {
             e.printStackTrace();
             System.out.println("错误: ------------>> 更新错误, 可能该设置已存在或者没有该解析");
         }
-
+        return false;
     }
 
     public String getDomainRecordId(String domain, String recordName) {

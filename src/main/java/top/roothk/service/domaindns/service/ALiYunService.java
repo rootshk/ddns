@@ -15,7 +15,7 @@ public interface ALiYunService {
      * @param priority  有限级 [1, 10] 默认1
      * @param line      解析线路, 默认default
      */
-    void updateDomainRecord(String domain, String rR, String value, String type, Long ttl, Long priority, String line);
+    Boolean updateDomainRecord(String domain, String rR, String value, String type, Long ttl, Long priority, String line);
 
     /**
      * 获取指定的ID

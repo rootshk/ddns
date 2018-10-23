@@ -23,7 +23,7 @@ public class UpdateDomainJob {
         //拿到当前的IP
         String newIP = NetWorkUtil.getOuterNetIp();
 
-        if (null == newIP)
+        if (newIP.equals(""))
             return;
 
         //一样就跳过
@@ -32,7 +32,8 @@ public class UpdateDomainJob {
 
         System.out.println("------------ 更新解析 -------------");
         //如果是空的,就直接传给阿里云再设置进去
-        aLiYunService.updateDomainRecord("roothk.top", "ip", newIP, "A", 600L, 1L, "default");
-        clientIP = newIP;
+        Boolean isT = aLiYunService.updateDomainRecord("roothk.top", "ip", newIP, "A", 600L, 1L, "default");
+        if (isT)
+            clientIP = newIP;
     }
 }
