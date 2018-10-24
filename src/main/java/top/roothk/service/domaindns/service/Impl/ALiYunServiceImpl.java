@@ -52,8 +52,8 @@ public class ALiYunServiceImpl implements ALiYunService {
             System.out.println("提示: ------------>> 更新解析成功");
             return true;
         } catch (ClientException e) {
-            e.printStackTrace();
-            System.out.println("错误: ------------>> 更新错误, 可能该设置已存在或者没有该解析");
+//            e.printStackTrace();
+            System.out.println("错误: ------------>> 更新错误, 可能该设置已存在");
         }
         return false;
     }
@@ -73,9 +73,9 @@ public class ALiYunServiceImpl implements ALiYunService {
                     return record.getRecordId();
             }
         } catch (ClientException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
+            System.out.println("错误: ------------>> 没有该域名");
         }
-        System.out.println("错误: ------------>> 没有该域名");
         return null;
     }
 }
