@@ -8,11 +8,13 @@ import com.aliyuncs.alidns.model.v20150109.UpdateDomainRecordRequest;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.profile.DefaultProfile;
 import com.aliyuncs.profile.IClientProfile;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import top.roothk.service.domaindns.service.ALiYunService;
 
 import java.util.List;
 
+@Slf4j
 @Service
 public class ALiYunServiceImpl implements ALiYunService {
 
@@ -49,11 +51,11 @@ public class ALiYunServiceImpl implements ALiYunService {
 //            updateDomainRecordResponse = client.getAcsResponse(updateDomainRecordRequest);
 //            System.out.println(updateDomainRecordResponse.getRecordId());
             client.getAcsResponse(updateDomainRecordRequest);
-            System.out.println("提示: ------------>> 更新解析成功");
+            log.info("提示: ------------>> 更新解析成功");
             return true;
         } catch (ClientException e) {
 //            e.printStackTrace();
-            System.out.println("错误: ------------>> 更新错误, 可能该设置已存在");
+            log.error("错误: ------------>> 更新错误, 可能该设置已存在");
         }
         return false;
     }
@@ -74,7 +76,7 @@ public class ALiYunServiceImpl implements ALiYunService {
             }
         } catch (ClientException e) {
 //            e.printStackTrace();
-            System.out.println("错误: ------------>> 没有该域名");
+            log.error("错误: ------------>> 没有该域名");
         }
         return null;
     }
