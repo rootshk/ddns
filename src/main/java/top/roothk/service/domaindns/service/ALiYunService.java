@@ -12,7 +12,7 @@ public interface ALiYunService {
      * @param value     更新的指, 如 127.0.0.1, 默认127.0.0.1
      * @param type      解析类型, 如 A, 默认A
      * @param ttl       TTL有效时长, 默认600
-     * @param priority  有限级 [1, 10] 默认1
+     * @param priority  优先级 [1, 10] 默认1
      * @param line      解析线路, 默认default
      */
     Boolean updateDomainRecord(String domain, String rR, String value, String type, Long ttl, Long priority, String line);
